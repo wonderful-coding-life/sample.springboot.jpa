@@ -33,7 +33,7 @@ public class CustomerControllerTests {
 			.andExpect(status().isOk())
 			.andReturn();
 		Customer customer = objectMapper.readValue(result.getResponse().getContentAsString(), Customer.class);
-		Customer actual = repository.findById(customer.getId()).orElseThrow();
+		Customer actual = repository.findById(customer.getId()).orElseThrow(() -> new IllegalStateException());
 		assertThat(actual.getName()).isEqualTo("홍길동");
 		assertThat(actual.getAddress()).isEqualTo("서울시 강남구 대치1동");
 		assertThat(actual.getContact()).isEqualTo("010-1111-1111");
@@ -48,7 +48,7 @@ public class CustomerControllerTests {
 		result = mockMvc.perform(put("/customer/" + customer.getId() + "?name=홍길철&address=서울시 강남구 대치2동&contact=010-1111-1112"))
 				.andExpect(status().isOk())
 				.andReturn();
-		Customer actual = repository.findById(customer.getId()).orElseThrow();
+		Customer actual = repository.findById(customer.getId()).orElseThrow(() -> new IllegalStateException());
 		assertThat(actual.getName()).isEqualTo("홍길철");
 		assertThat(actual.getAddress()).isEqualTo("서울시 강남구 대치2동");
 		assertThat(actual.getContact()).isEqualTo("010-1111-1112");
