@@ -14,7 +14,7 @@ import com.example.demo.dao.CustomerRepository;
 import com.example.demo.entity.Customer;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/api/customer")
 public class CustomerController {
 
 	private CustomerRepository repository;
