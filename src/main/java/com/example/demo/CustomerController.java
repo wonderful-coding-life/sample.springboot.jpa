@@ -30,7 +30,7 @@ public class CustomerController {
 		this.repository = repository;
 	}
 	
-	@GetMapping("/")
+	@GetMapping("")
 	@ApiOperation(value = "등록된 고객 목록 조회", notes = "시스템에 등록된 모든 고객 정보를 조회합니다.\n삭제된 고객은 조회에서 제외됩니다.")
 	public List<Customer> getCustomerList() {
 		return (List<Customer>) repository.findAll();
@@ -46,7 +46,7 @@ public class CustomerController {
 		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "삭제되거나 없는 고객입니다"));
 	}
 	
-	@PostMapping("/")
+	@PostMapping("")
 	@ApiOperation(value = "고객 정보 생성", notes = "고객 정보를 생성합니다.\n고객 아이디가 자동으로 생성되어 부여됩니다.")
 	@ApiResponse(code = 200, message = "고객 정보를 정상적으로 생성하였습니다.")
 	public Customer postCustomer(

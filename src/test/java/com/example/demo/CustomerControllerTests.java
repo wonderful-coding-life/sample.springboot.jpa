@@ -29,7 +29,7 @@ public class CustomerControllerTests {
 	
 	@Test
 	public void postCustomer() throws Exception {
-		MvcResult result = mockMvc.perform(post("/customer?name=홍길동&address=서울시 강남구 대치1동&contact=010-1111-1111"))
+		MvcResult result = mockMvc.perform(post("/api/customer?name=홍길동&address=서울시 강남구 대치1동&contact=010-1111-1111"))
 			.andExpect(status().isOk())
 			.andReturn();
 		Customer customer = objectMapper.readValue(result.getResponse().getContentAsString(), Customer.class);
@@ -41,11 +41,11 @@ public class CustomerControllerTests {
 	
 	@Test
 	public void putCustomer() throws Exception {
-		MvcResult result = mockMvc.perform(post("/customer?name=홍길동&address=서울시 강남구 대치1동&contact=010-1111-1111"))
+		MvcResult result = mockMvc.perform(post("/api/customer?name=홍길동&address=서울시 강남구 대치1동&contact=010-1111-1111"))
 			.andExpect(status().isOk())
 			.andReturn();
 		Customer customer = objectMapper.readValue(result.getResponse().getContentAsString(), Customer.class);
-		result = mockMvc.perform(put("/customer/" + customer.getId() + "?name=홍길철&address=서울시 강남구 대치2동&contact=010-1111-1112"))
+		result = mockMvc.perform(put("/api/customer/" + customer.getId() + "?name=홍길철&address=서울시 강남구 대치2동&contact=010-1111-1112"))
 				.andExpect(status().isOk())
 				.andReturn();
 		Customer actual = repository.findById(customer.getId()).orElseThrow(() -> new IllegalStateException());
