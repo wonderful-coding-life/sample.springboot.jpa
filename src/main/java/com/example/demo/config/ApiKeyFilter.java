@@ -31,6 +31,7 @@ public class ApiKeyFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		if (!StringUtils.isEmpty(apiKey) && !apiKey.equals(req.getHeader("Authorization"))) {
+			System.out.println("unauthorized apiKey=[" + req.getHeader("Authorization") + "]");
 			res.setStatus(HttpStatus.UNAUTHORIZED.value());
 		} else {
 			chain.doFilter(request, response);
